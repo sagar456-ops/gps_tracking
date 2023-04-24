@@ -1,0 +1,135 @@
+@media (max-width: 63.9375em) {
+  .hide-for-mobile {
+    display: none;
+  }
+  .main_hero_body{
+    display: flex;
+  }
+  .about_bodymain{
+    display: block;
+  }
+  .adminoption{
+    display: block;
+  }
+  
+}
+
+@media (min-width: 64em) {
+  .hide-for-desktop {
+    display: none;
+  }
+}
+
+@media (max-width:500px) {
+  .footer-menu ul{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .adminoption {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 45rem) {
+  .hero_image img{
+    width: 25rem;
+  }
+}
+
+
+@media only screen and (max-width:1200px) {
+ .sidebar {
+    width:100px;
+  }
+  
+  
+  
+  .sidebar .sidebar-brand h2 span:last-child,
+  .sidebar li a span:last-child {
+    display: none;
+  }
+  
+  .main-content{
+    margin-left: 100px;
+  }
+  
+  .main-content header1{
+    left: 100px;
+    width: calc(100% - 100px);
+  }
+  
+
+
+  .contact-body{
+    grid-template-columns: repeat(2,1fr);
+  }
+  
+  .paymentbody, .paymentbody_user{
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+@media only screen and (max-width:900px) {
+  .cards{
+    grid-template-columns: repeat(3,1fr);
+  }
+  .main-content header1{
+    width: calc(100% - 100px);
+  }
+  .contact-body{
+    grid-template-columns: 100%;
+  }
+}
+
+@media only screen and (max-width:468px) {
+  .paymentbody, .paymentbody_user{
+    width: 100%;
+    margin: 0px;
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .cards{
+    grid-template-columns: repeat(2,1fr);
+  }
+  .search-wrapper{
+    display: none;
+  }
+  .paymentbody{
+    width: 100%;
+    display: grid;
+    margin: 0px;
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .cards{
+    grid-template-columns: repeat(2,1fr);
+  }
+  
+  .recent-grid{
+    grid-template-columns: 100%;
+  }
+
+  .search-wrapper{
+    display: none;
+  }
+}
+
+@media only screen and (max-width:600px) {
+  .cards{
+    grid-template-columns: 100%;
+  }
+  .paymentbody, .paymentbody_user{
+    grid-template-columns: 85%;
+  }
+
+
+}
