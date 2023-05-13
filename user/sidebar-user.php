@@ -1,5 +1,5 @@
 <!--Admin ko sidebar ko part ko code-->
-<?php session_start(); ?>
+<?php //session_start(); ?>
 <div class="sidebar">
     <div class="sidebar-brand">
         <h2><span class="las la-dumpster"></span><span>GPS Tracker System</span></h2>

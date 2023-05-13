@@ -48,6 +48,11 @@ if ($number = $_SESSION['number']) {
                                           <div>
                                                 <h1>
                                                       <?php
+      $number = $_SESSION['number'];
+      $sql = mysqli_query($con, "SELECT location From usertable WHERE number= '$number'");
+      while ($row = mysqli_fetch_array($sql)) {
+            $l = $row['location'];
+      }
                                                       $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                       mysqli_select_db($con, 'sagar');
                                                       $result_1 = mysqli_query($con, "SELECT * FROM schedule WHERE date = cast(Date(Now()) as Date) AND location = '$l'");
@@ -96,22 +101,25 @@ if ($number = $_SESSION['number']) {
                                           <div>
                                                 <h1>
                                                       <?php
-                                                      $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
-                                                      mysqli_select_db($con, 'sagar');
-                                                      $number = $_SESSION['number'];
-                                                      $result_1 = mysqli_query($con, "SELECT created_at,status FROM orders WHERE user_number='$number'");
-                                                      while ($row = mysqli_fetch_array($result_1)) {
-                                                            $date = $row['created_at'];
-                                                            $status = $row['status'];
-                                                      }
+      $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
+      mysqli_select_db($con, 'sagar');
+      $number = $_SESSION['number'];
+      $result_1 = mysqli_query($con, "SELECT created_at,status FROM orders WHERE user_number='$number'");
+      while ($row = mysqli_fetch_array($result_1)) {
+            $date = $row['created_at'];
+            $status = $row['status'];
+      }
 
-                                                      if($status == 1){
-                                                            $date = $row['created_at'];
-                                                            echo date('Y-m-d', strtotime($date . ' + 30 days'));
-                                                      }
-                                                      else{
-                                                            echo "Payment must be done....";
-                                                      }
+      if ($status == 1) {
+            $date = $row['created_at'];
+            echo date('Y-m-d', strtotime($date . ' + 30 days'));
+      } else if ($status == 0) {
+            echo "Payment must be done....";
+      }
+
+                                                 
+
+                                                      
 
                                                  
                                                       ?>
@@ -475,7 +483,7 @@ if ($number = $_SESSION['number']) {
                                                
                                                       <input class="un" type="password" name="password" id="password" placeholder="Enter your new password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                       <span class="span_class1" id="span_class1" align="center"></span>
-                                                      <div class="login_button_body" style="padding-botton:1rem;">
+                                                      <div class="login_button_body" style="padding:1rem;">
                                                             <input class="show_pass" type="checkbox" onclick="myFunction()">Show Password<br>
                                                             <button class="login_button" id="submit_btn_1" type="submit" value="submit_btn_1" name="submit_btn_1">Update Details</button>
                                                       </div>

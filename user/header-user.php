@@ -2,7 +2,7 @@
 Must be placed inside main-content div-->
 <?php
 include "./database.php";
-session_start();
+//session_start();
 ?>
 
 
