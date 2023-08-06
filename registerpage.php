@@ -96,41 +96,16 @@
 
 
 
-                  <input class="un" type="number" name="number" id="number" placeholder="Mobile Number" pattern="(\+977)?[9][6-9]\d{8}" required></input>
+                  <input class="un" type="text" name="number" id="number" placeholder="Mobile Number" pattern="(\+977)?[9][6-9]\d{8}" required></input>
                   <span class="span_class" align="center"></span>
                   <input class="un" type="file" placeholder="Upload Citizenship" name="file" id="file" required></input>
                   <div class="camera" id="my_camera"></div>
-                  <div class="button-wrapper">
-                        <button class="small_button" id="take_snap">Take Snapshot</button>
-                        <input type="hidden" name="image" id="image_input">
-                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
-                        <script language="JavaScript">
-                        Webcam.set({
-                        width: 320,
-                        height: 240,
-                        image_format: 'jpeg',
-                        jpeg_quality: 90,
-                        flip_horiz: true
-                        });
-
-                        Webcam.attach('#my_camera');
-
-                        document.getElementById("take_snap").addEventListener("click", function() {
-                        Webcam.snap( function(data_uri) {
-                              document.getElementById('image_input').value = data_uri;
-                        });
-                        });
-                        </script>
-                  </div>
                   <input class="un" type="password" name="password" id="password" placeholder="Enter your new password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                   <span class="span_class1" align="center"></span>
                   <div class="login_button_body">
                         <input class="show_pass" type="checkbox" onclick="myFunction()">Show Password<br>
                         <button class="login_button" id="submit_btn" type="submit" value="submit_btn name=" submit_btn">Register</button>
                   </div>
-
-
-                  <button class="login_button_inverse" onclick="goBack()">Go Back</button>
 
                   <script type="text/javascript">
                         function goBack() {

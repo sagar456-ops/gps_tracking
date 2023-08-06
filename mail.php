@@ -21,33 +21,36 @@ if (isset($_POST['mail_btn'])) {
       //Set this to true if SMTP host requires authentication to send email
       $mail->SMTPAuth = true;
       //Provide username and password
-      $mail->Username = "";//Enter email
-      $mail->Password = '';//enter password
+      $mail->Username = "sagarrimal87@gmail.com";//Enter email
+      $mail->Password = 'spatjfdenixphamp';//enter password
       //If SMTP requires TLS encryption then set it
       $mail->SMTPSecure = "tls";
       //Set TCP port to connect to
       $mail->Port = 587;
-      $mail->From = "";//Enter Email
-      $mail->FromName = "";//Enter Name
+      $mail->From = "sagarrimal87@gmail.com";//Enter Email
+      $mail->FromName = "GPS system";//Enter Name
       $mail->AddAddress($_POST['email']);
       $mail->isHTML(true);
       $mail->Subject = "Confirmation of account";
-      $mail->Body = "<i>Your Accound Has been confirmed......</i>";
+      $mail->Body = "<i>Your Account Has been confirmed...... visit http://localhost:8080/GPS_myrepo/gps_tracking/index1.php for login</i>";
       //$mail->AltBody = "This is the plain text version of the email content";
 
       if (!$mail->send()) {
+           // echo"error";
+
 ?>
             <script>
-                  alert("Mail has been sent sucessfully");
-                  window.location.href = 'managerpanel.php';
+               alert("Failed");
+                window.location.href = 'managerpanel.php';
             </script>
 
       <?php
       } else {
+          //  echo"Sucess";
       ?>
             <script>
-                  alert("Mail has been sent sucessfully");
-                  window.location.href = 'managerpanel.php';
+                alert("Mail has been sent sucessfully");
+                window.location.href = 'managerpanel.php';
             </script>
 
 <?php

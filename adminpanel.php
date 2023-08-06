@@ -195,7 +195,17 @@ ini_set('display_notice', 0);
                                                       <?php
                                                       $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                       mysqli_select_db($con, 'sagar');
-      $result = mysqli_query($con, "SELECT name,number,location,orders.status as status FROM usertable INNER JOIN orders ON usertable.number = orders.user_number");
+      $result = mysqli_query($con, "SELECT usertable.name, usertable.number, usertable.location, orders.status
+FROM usertable
+INNER JOIN (
+    SELECT user_number, MAX(created_at) AS latest_timestamp
+    FROM orders
+    GROUP BY user_number
+) latest_orders
+ON usertable.number = latest_orders.user_number
+INNER JOIN orders
+ON usertable.number = orders.user_number AND orders.created_at = latest_orders.latest_timestamp;
+");
                                                       while ($row = mysqli_fetch_array($result)) {
                                                       ?>
                                                             <tr>
@@ -386,7 +396,15 @@ ini_set('display_notice', 0);
                                                 <?php
                                                 $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                 mysqli_select_db($con, 'sagar');
-                                                $result = mysqli_query($con, "SELECT orders.id as id ,name,location,number,total,created_at,orders.status as status FROM usertable INNER JOIN orders ON usertable.number = orders.user_number");
+                                                $result = mysqli_query($con, "SELECT o.id as id, u.name, u.location, u.number, o.total, o.created_at, o.status 
+FROM usertable u
+INNER JOIN orders o ON u.number = o.user_number
+INNER JOIN (
+    SELECT user_number, MAX(created_at) AS latest_created_at
+    FROM orders
+    GROUP BY user_number
+) latest_orders ON o.user_number = latest_orders.user_number AND o.created_at = latest_orders.latest_created_at;
+");
                                                 while ($row = mysqli_fetch_array($result)) {
                                                 ?>
                                                       <tr>

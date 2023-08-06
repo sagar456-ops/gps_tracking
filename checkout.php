@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                           <input value="0" name="pdc" type="hidden">
                                           <input value="epay_payment" name="scd" type="hidden">
                                           <input value="<?php echo $invoice_no; ?>" name="pid" type="hidden">
-                                          <input value="http://localhost/GPS_myrepo/gps_tracking/esewa_payment_success.php" type="hidden" name="su">
-                                          <input value="http://localhost/GPS_myrepo/gps_tracking/esewa_payment_failed.php" type="hidden" name="fu">
+                                          <input value="http://localhost:8080/GPS_myrepo/gps_tracking/esewa_payment_success.php" type="hidden" name="su">
+                                          <input value="http://localhost:8080/GPS_myrepo/gps_tracking/esewa_payment_failed.php" type="hidden" name="fu">
                                           <input type="image" src="images/esewa.png" width="100px">
                               </li
                         </ul>

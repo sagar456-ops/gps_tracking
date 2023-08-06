@@ -544,6 +544,11 @@ form.form1 {
     padding-top: 2rem;
 }
 
+.login_button_body_new {
+    margin-left: 40%;
+    padding-top: 2rem;
+}
+
 .login_button_body_panel {
     margin-left: 35%;
 }
@@ -1032,7 +1037,8 @@ main .active {
     width: 300px;
 }
 
-.payment_element:hover, .payment_element1:hover {
+.payment_element:hover,
+.payment_element1:hover {
     background-color: var(--primary);
     color: #FFFFFF;
     transition: ease-in-out;
@@ -1043,7 +1049,7 @@ main .active {
     text-align: center;
 }
 
-.price_body h2{
+.price_body h2 {
     margin-left: -10%;
 }
 
@@ -1052,7 +1058,7 @@ main .active {
     margin-bottom: 0.5rem;
 }
 
-.price_body1{
+.price_body1 {
     margin-left: 50%;
     margin-bottom: 0.5rem;
 }
@@ -1061,18 +1067,19 @@ main .active {
     margin-top: 2rem;
 }
 
-.pbody{
+.pbody {
     width: 200px;
 }
 
-.pbody_body input{
+.pbody_body input {
     border: #FFFFFF;
 }
-.pbody_body input:hover{
+
+.pbody_body input:hover {
     border: var(--primary);
 }
 
-.camera{
+.camera {
     margin: 1rem;
     margin-left: 35%;
 }

@@ -45,25 +45,60 @@ if ($number = $_SESSION['number']) {
 
                               <div class="cards">
                                     <div class="card-single">
+                                          <h1>
+                                                <?php
+                                                $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
+                                                mysqli_select_db($con, 'sagar');
+                                                $number = $_SESSION['number'];
+                                                $result_1 = mysqli_query($con, "SELECT otp_status FROM usertable where number ='$number';");
+                                                if (!$result_1) {
+                                                      // Handle the error, e.g., using mysqli_error($con)
+                                                      echo "Error executing query: " . mysqli_error($con);
+                                                } else {
+                                                      // Check if there are any rows returned
+                                                      if (mysqli_num_rows($result_1) > 0) {
+                                                            $row = mysqli_fetch_assoc($result_1);
+                                                            if ($row['otp_status'] == 0) {
+                                                                  echo "Phone Not verified";
+                                                            } else {
+                                                                  echo "Phone Number Verified";
+                                                            }
+                                                      }
+                                                }
+
+                                                ?>
+
+                                          </h1>
+                                    </div>
+
+                                    <div class="card-single">
                                           <div>
                                                 <h1>
                                                       <?php
-      $number = $_SESSION['number'];
-      $sql = mysqli_query($con, "SELECT location From usertable WHERE number= '$number'");
-      while ($row = mysqli_fetch_array($sql)) {
-            $l = $row['location'];
-      }
+
+                                                      $number = $_SESSION['number'];
+                                                      $sql = mysqli_query($con, "SELECT location From usertable WHERE number= '$number'");
+                                                      while ($row = mysqli_fetch_array($sql)) {
+                                                            $l = $row['location'];
+                                                      }
+                                                      // var_dump($l);
                                                       $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                       mysqli_select_db($con, 'sagar');
                                                       $result_1 = mysqli_query($con, "SELECT * FROM schedule WHERE date = cast(Date(Now()) as Date) AND location = '$l'");
-                                                      if ($result = mysqli_num_rows($result_1) > 0) {
-                                                            // there are results in $result
-                                                            echo "YES";
-                                                      } else 
-                                                      {
-                                                            // no results
-                                                            echo "NO";
+                                                      if (!$result_1) {
+                                                            // Handle the error, e.g., using mysqli_error($con)
+                                                            echo "Error executing query: " . mysqli_error($con);
+                                                      } else {
+                                                            // Check if there are any rows returned
+                                                            if (mysqli_num_rows($result_1) > 0) {
+                                                                  // There are results for the user's location in the table
+                                                                  echo "YES";
+                                                            } else {
+                                                                  // No results for the user's location in the table
+                                                                  echo "NO";
+                                                            }
                                                       }
+
                                                       ?>
 
 
@@ -91,6 +126,7 @@ if ($number = $_SESSION['number']) {
                                                       }
                                                       ?>
                                                 </h1>
+
                                                 <span>Account-Status</span>
                                           </div>
                                           <div>
@@ -101,27 +137,27 @@ if ($number = $_SESSION['number']) {
                                           <div>
                                                 <h1>
                                                       <?php
-      $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
-      mysqli_select_db($con, 'sagar');
-      $number = $_SESSION['number'];
-      $result_1 = mysqli_query($con, "SELECT created_at,status FROM orders WHERE user_number='$number'");
-      while ($row = mysqli_fetch_array($result_1)) {
-            $date = $row['created_at'];
-            $status = $row['status'];
-      }
+                                                      $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
+                                                      mysqli_select_db($con, 'sagar');
+                                                      $number = $_SESSION['number'];
+                                                      $result_1 = mysqli_query($con, "SELECT MAX(created_at) as created_at, status FROM orders WHERE user_number = '$number'");
+                                                      while ($row = mysqli_fetch_array($result_1)) {
+                                                            $date = $row['created_at'];
+                                                            $status = $row['status'];
+                                                            if ($status == 1) {
+                                                                  $date = $row['created_at'];
+                                                                  // var_dump($date);
+                                                                  echo date('Y-m-d', strtotime($date . ' + 30 days'));
+                                                            } else if ($status == 0) {
+                                                                  echo "Payment must be done....";
+                                                            }
+                                                      }
 
-      if ($status == 1) {
-            $date = $row['created_at'];
-            echo date('Y-m-d', strtotime($date . ' + 30 days'));
-      } else if ($status == 0) {
-            echo "Payment must be done....";
-      }
 
-                                                 
 
-                                                      
 
-                                                 
+
+
                                                       ?>
                                                 </h1>
 
@@ -131,9 +167,12 @@ if ($number = $_SESSION['number']) {
                                                 <span class="las la-calendar-times"></span>
                                           </div>
                                     </div>
+
+
                                     <div class="card-single">
                                           <div>
                                                 <h1>
+
                                                       <?php
                                                       $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                       mysqli_select_db($con, 'sagar');
@@ -152,6 +191,7 @@ if ($number = $_SESSION['number']) {
                                                 <span class="las la-map-marker"></span>
                                           </div>
                                     </div>
+
 
                               </div>
                         </div>
@@ -253,7 +293,7 @@ if ($number = $_SESSION['number']) {
 
 
                         <div class="content schedulepage in-active">
-                              <div class="table-contact-panel">
+                              <div class="table-contact-panel" style=" margin-bottom: 13%;">
                                     <h3>Schedule</h3>
                                     <table width="100%">
                                           <thead>
@@ -290,7 +330,72 @@ if ($number = $_SESSION['number']) {
                                           </tbody>
                                     </table>
                               </div>
+
                         </div>
+                        <?php
+                        function deleteExpiredRecords($con)
+                        {
+                              // Calculate the timestamp for 24 hours ago
+                              $time24HoursAgo = time() - (24 * 60 * 60);
+
+                              // Convert the timestamp to a MySQL-compatible date format
+                              $dateTime24HoursAgo = date("Y-m-d H:i:s", $time24HoursAgo);
+
+                              // Query to delete expired records from the 'alert' table
+                              $deleteQuery = "DELETE FROM alert WHERE date < '$dateTime24HoursAgo';";
+
+                              // Execute the delete query
+                              mysqli_query($con, $deleteQuery);
+                        }
+                        ?>
+
+                        <div class="content schedulepage in-active">
+                              <div class="table-contact-panel">
+                                    <h3>Alert Notice</h3>
+                                    <table width="100%">
+                                          <thead>
+                                                <tr>
+                                                      <td>Date</td>
+                                                      <td>Message</td>
+                                                      <td>location</td>
+                                                </tr>
+                                          </thead>
+                                          <tbody>
+                                                <?php
+                                                $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
+                                                mysqli_select_db($con, 'sagar');
+      // Delete expired records before fetching the data
+      deleteExpiredRecords($con);
+                                                $number = $_SESSION['number'];
+                                                $result_1 = mysqli_query($con, "SELECT * FROM alert AS a JOIN 
+                                                      usertable AS u ON a.location COLLATE utf8mb4_unicode_ci = u.location COLLATE utf8mb4_unicode_ci WHERE u.number=$number;");
+                                                while ($row = mysqli_fetch_array($result_1)) {
+                                                ?>
+                                                      <tr>
+                                                            <td><?php echo $row['date']; ?></td>
+                                                            <td><?php echo $row['msg']; ?></td>
+                                                            <td><?php echo $row['location']; ?></td>
+
+
+                                                      </tr>
+
+                                                <?php }
+
+                                                ?>
+
+                                          </tbody>
+
+
+
+                                    </table>
+
+
+                                    </h1>
+                              </div>
+                        </div>
+
+
+
 
 
 
@@ -423,8 +528,7 @@ if ($number = $_SESSION['number']) {
                                                             include_once 'database.php';
                                                             $sql = mysqli_query($con, "SELECT * From usertable WHERE number = $number");
                                                             $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)) 
-                                                            {
+                                                            while ($row = mysqli_fetch_array($sql)) {
                                                                   echo "<option value='" . $row['id'] . "'>" . $row['id'] . "</option>";
                                                             }
                                                             ?>
@@ -480,10 +584,10 @@ if ($number = $_SESSION['number']) {
                                                                         long;
                                                             }
                                                       </script>
-                                               
+
                                                       <input class="un" type="password" name="password" id="password" placeholder="Enter your new password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                                                       <span class="span_class1" id="span_class1" align="center"></span>
-                                                      <div class="login_button_body" style="padding:1rem;">
+                                                      <div class="login_button_body_new" style="padding:1rem;">
                                                             <input class="show_pass" type="checkbox" onclick="myFunction()">Show Password<br>
                                                             <button class="login_button" id="submit_btn_1" type="submit" value="submit_btn_1" name="submit_btn_1">Update Details</button>
                                                       </div>
@@ -531,21 +635,76 @@ if ($number = $_SESSION['number']) {
                                                       </script>
                                                 </form>
                                           </div>
+
+                                          <div>
+                                                <span class="las la-wallet"></span>
+                                          </div>
                               </div>
+                        </div>
+                        <div class="content verifypage in-active">
+                              <div class="table-contact-panel">
+                                    <!DOCTYPE html>
+                                    <html lang="en">
+                                    <?php
+                                    session_start();
+                                    ?>
+
+                                    <head>
+                                          <meta charset="UTF-8">
+                                          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                          <title>Document</title>
+                                    </head>
+
+                                    <body>
+                                          <div class="login_body" style="margin-top:1rem">
+                                                <form class="form1" action=" otp.php" method="post">
+                                                      <select class="un" name="phone" id="phone" required>
+                                                            <option value="" disabled selected>Choose your Number </option>
+                                                            <?php
+                                                            include_once 'database.php';
+                                                            $number = $_SESSION['number'];
+                                                            $sql = mysqli_query($con, "SELECT number From usertable where number = '$number'");
+                                                            $row = mysqli_num_rows($sql);
+                                                            while ($row = mysqli_fetch_array($sql)) {
+                                                                  echo "<option value='" . $row['number'] . "'>" . $row['number'] . "</option>";
+                                                            }
+                                                            ?>
+                                                      </select>
+                                                      <div class="login_button_body_new" style="padding:1rem;">
+                                                            <button class="login_button" id="otp_btn" name="otp_btn">Send Otp</button>
+                                                      </div>
+                                                </form>
+                                                <form class="form1" action="verify_otp.php" method="post">
+                                                      <input class="un" type="number" name="otp" id="otp" placeholder="Enter your otp recieved in message"><br>
+                                                      <div class="login_button_body_new" style="padding:1rem;">
+                                                            <button class="login_button" id="otp_btn_verify" name="otp_btn_verify">Verify</button>
+
+                                                      </div>
+                                                </form>
+                                          </div>
 
 
-                  </main>
-            </div>
+                              </div>
+      </body>
+
+      </html>
+      </div>
+      </div>
+
+
+      </main>
+      </div>
       </body>
 
 <?php } else {
 ?>
       <script>
-            alert("Login Again");
+            alert(" Login Again");
             window.location.href = 'index1.php';
       </script>
 <?php
 }
 ?>
 
-      </html>
+</html>

@@ -189,6 +189,7 @@ ini_set('display_notice', 0);
                                                             <td>
                                                                   Document
                                                             </td>
+                                                            <td>Phone status</td>
                                                             <td>
                                                                   Action
                                                             </td>
@@ -226,6 +227,16 @@ ini_set('display_notice', 0);
                                                                   </td>
 
                                                                   <td><a style="color:blue;" href="uploads/<?php echo $row['file'] ?>" target="managerpanel.php">CLICK TO VIEW</a></td>
+                                                                  <td>
+                                                                        <?php
+                                                                        if ($row['otp_status'] == 0) {
+                                                                              echo "Phone Not verified &#10060;";
+                                                                        } else {
+                                                                              echo "Phone       Verified &#9989;";
+                                                                        }
+                                                                        ?>
+
+                                                                  </td>
                                                                   <td>
                                                                         <form action="update_user.php" method="post">
                                                                               <input type="hidden" name="change_id" value="<?php echo $row['id']; ?>">
@@ -352,6 +363,67 @@ ini_set('display_notice', 0);
                                     leafletMarkers.addTo(map);
                               </script>
                         </div>
+
+                        <div class="content alertpage in-active">
+                              <?php
+
+
+                              // Check if the form is submitted
+                              if (isset($_POST["alert_btn"])) {
+                                    // Include the database connection file
+                                    include("database.php");
+
+                                    // Sanitize and store the form data in variables
+                                    $date = mysqli_real_escape_string($con, $_POST['date']);
+                                    $msg = mysqli_real_escape_string($con, $_POST['msg']);
+                                    $location = mysqli_real_escape_string($con, $_POST['location']);
+
+                                    // Check if the entry with the same date and location already exists in the database
+                             
+                                          $sql = "INSERT INTO alert (date, msg, location) VALUES ('$date', '$msg', '$location')";
+                                          $result = mysqli_query($con, $sql);
+                                          if ($result) {
+                                          ?>
+                                                <script>
+                                                      alert("Updated successfully");
+                                                      window.location = 'managerpanel.php';
+                                                </script>
+                                          <?php
+                                          } else {
+                                          ?>
+                                                <script>
+                                                      alert("Error occurred while updating");
+                                                      window.location = 'managerpanel.php';
+                                                </script>
+                              <?php
+                                          }
+                                    }
+                              
+                              ?>
+
+                              <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                                    <p class="sign" align="center">Create Alert</p>
+                                    <input placeholder="Select Date" class="un" type="date" name="date" id="date" min="<?php echo date("Y-m-d"); ?>">
+                                    <textarea name="msg" id="msg" class="un" placeholder="Enter Alert message..." rows="6"></textarea>
+                                    <select class="un" name="location" id="location" required>
+                                          <option value="" disabled selected>Choose your area</option>
+                                          <?php
+                                          include 'database.php';
+                                          $number = $_SESSION['number'];
+                                          $sql = mysqli_query($con, "SELECT location FROM admintable WHERE number='$number'");
+                                          while ($row = mysqli_fetch_array($sql)) {
+                                                echo "<option value='" . $row['location'] . "'>" . $row['location'] . "</option>";
+                                          }
+                                          ?>
+                                    </select>
+                                    <div class="login_button_body" style="margin-left: 41%; padding-bottom: 3%;">
+                                          <button class="login_button" id="alert_btn" type="submit" value="alert_btn" name="alert_btn">Submit</button>
+                                    </div>
+                              </form>
+
+                        </div>
+
+            </div>
             </div>
 
 

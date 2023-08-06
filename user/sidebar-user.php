@@ -1,5 +1,6 @@
 <!--Admin ko sidebar ko part ko code-->
-<?php //session_start(); ?>
+<?php //session_start(); 
+?>
 <div class="sidebar">
     <div class="sidebar-brand">
         <h2><span class="las la-dumpster"></span><span>GPS Tracker System</span></h2>
@@ -14,13 +15,16 @@
                 <a href="#" class="payment in-active"><span class="las la-wallet"></span><span>Payments</span></a>
             </li>
             <li>
-                <a href="#" class="schedule in-active"><span class="las la-calendar-day"></span><span>Schedule</span></a>
+                <a href="#" class="schedule in-active"><span class="las la-calendar-day"></span><span>Schedule/Alert</span></a>
             </li>
             <li>
                 <a href="#" class="location in-active"><span class="las la-location-arrow"></span><span>Live Location</span></a>
             </li>
             <li>
                 <a href="#" class="account in-active"><span class="las la-user-circle"></span><span>Account</span></a>
+            </li>
+            <li>
+                <a href="#" class="verify in-active"><span class="las la-user-circle"></span><span>verify</span></a>
             </li>
             <li>
                 <a href="./logout.php" class="in-active"><span class="las la-sign-out-alt"></span><span>Sign out</span></a>
@@ -121,6 +125,22 @@
 
             if ($('main .accountpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.   
                 $('main .accountpage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .verify').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
+
+            if ($('main .verifypage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.   
+                $('main .verifypage')
                     .removeClass('in-active')
                     .addClass('active');
             }

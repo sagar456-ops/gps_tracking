@@ -35,7 +35,7 @@
       ?>
             <form action="login.php" method="post" class="form1">
                         <p class="sign" align="center">Sign in</p>   
-                        <input align="center" type="number" class="un" id="number" name="number" placeholder="Enter your Mobile Number " required>
+                        <input align="center" type="text" class="un" id="number" name="number" placeholder="Enter your Mobile Number " required>
                         <input align="center" type="password" class="un" name="password" id="password" placeholder="Enter your password" required>
                         <div class="login_button_body">
                              <input align="center"  type="checkbox" class="show_pass" onclick="myFunction()">Show Password <br>
