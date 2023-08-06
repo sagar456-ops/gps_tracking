@@ -9,7 +9,7 @@ include('database.php');
 if (isset($_POST['otp_btn'])) {
       // Your Account Sid and Auth Token from twilio.com/console
       $account_sid = 'AC3c1d10e42f262bb4b2c83f2655e9a32b';
-      $auth_token = '5d9bf75520d1fdcd8e853ee845921318';
+      $auth_token = 'f82d2ed4940d8830ade2409d7b43b34b';
       $twilio_number = '+17623095328';
 
       $client = new Client($account_sid, $auth_token);
