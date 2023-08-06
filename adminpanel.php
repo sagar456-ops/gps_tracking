@@ -195,7 +195,7 @@ ini_set('display_notice', 0);
                                                       <?php
                                                       $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
                                                       mysqli_select_db($con, 'sagar');
-      $result = mysqli_query($con, "SELECT usertable.name, usertable.number, usertable.location, orders.status
+                                                      $result = mysqli_query($con, "SELECT usertable.name, usertable.number, usertable.location, orders.status
 FROM usertable
 INNER JOIN (
     SELECT user_number, MAX(created_at) AS latest_timestamp
@@ -448,6 +448,39 @@ INNER JOIN (
                                     </table>
                               </div>
 
+                        </div>
+                        <div class="content feedbackpage in-active">
+                              <div class="table-contact-panel">
+                                    <h3>Feedback</h3>
+                                    <table width="100%">
+                                          <thead>
+                                                <tr>
+                                                      <td>Customer Name</td>
+                                                      <td>Email</td>
+
+                                                      <td>Message</td>
+
+                                                </tr>
+                                          </thead>
+                                          <tbody>
+                                                <?php
+                                                $con = mysqli_connect('localhost', 'sagar', 'Iamsagar456@');
+                                                mysqli_select_db($con, 'sagar');
+                                                $result = mysqli_query($con, "Select * from feedback;");
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                      <tr>
+
+                                                            <td><?php echo $row['name']; ?></td>
+                                                            <td><?php echo $row['email']; ?> </td>
+                                                            <td><?php echo $row['feedback']; ?> </td>
+
+                                                      <?php } ?>
+                                                      </tr>
+                                          </tbody>
+                                    </table>
+
+                              </div>
                         </div>
                   </main>
             </div>

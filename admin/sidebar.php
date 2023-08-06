@@ -28,6 +28,9 @@ include "./database.php";
                     <a href="#" class="payment in-active"><span class="las la-wallet"></span><span>Payments</span></a>
                 </li>
                 <li>
+                    <a href="#" class="feedback in-active"><span class="las la-user-tie"></span><span>Users Feedback</span></a>
+                </li>
+                <li>
                     <a href="./logout.php" class="in-active"><span class="las la-sign-out-alt"></span><span>Sign out</span></a>
                 </li>
             <?php endif; ?>
@@ -45,9 +48,9 @@ include "./database.php";
                     <a href="#" class="in-active"><span class="las la-location-arrow"></span><span>Live Location</span></a>
                 </li>
                 <li>
-                        <a href="./logout.php" class="in-active"><span class="las la-sign-out-alt"></span><span>Sign out</span> </a>
+                    <a href="./logout.php" class="in-active"><span class="las la-sign-out-alt"></span><span>Sign out</span> </a>
                 </li>
-            
+
             <?php endif; ?>
         </ul>
     </div>
@@ -76,79 +79,96 @@ include "./database.php";
 <!-- for main body-->
 <!--for homepage-->
 <script>
-        $(document).ready(function () {
-            $('.sidebar-menu ul li .dashboard').click(function () {
-                $('main .content').removeClass('active');       //Remove active class from all tags
-                $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .dashboard').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
 
-                if ($('main .homepage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.   
-                    $('main .homepage')
-                        .removeClass('in-active')
-                        .addClass('active');
-                }
-            })
-        });
-    </script>
+            if ($('main .homepage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.   
+                $('main .homepage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
+</script>
 
 <!--for customer-->
 <script>
-        $(document).ready(function () {
-            $('.sidebar-menu ul li .customer').click(function () {
-                $('main .content').removeClass('active');       //Remove active class from all tags
-                $('main .content').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .customer').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
 
-                if ($('main .customerpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
-                    $('main .customerpage')
-                        .removeClass('in-active')
-                        .addClass('active');
-                }
-            })
-        });
+            if ($('main .customerpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
+                $('main .customerpage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
 </script>
+
+
 <!-- fro area-->
 <script>
-        $(document).ready(function () {
-            $('.sidebar-menu ul li .area').click(function () {
-                $('main .content').removeClass('active');       //Remove active class from all tags
-                $('main .content').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .area').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
 
-                if ($('main .areapage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
-                    $('main .areapage')
-                        .removeClass('in-active')
-                        .addClass('active');
-                }
-            })
-        });
+            if ($('main .areapage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
+                $('main .areapage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
 </script>
 
 <!--for payment-->
 <script>
-        $(document).ready(function () {
-            $('.sidebar-menu ul li .payment').click(function () {
-                $('main .content').removeClass('active');       //Remove active class from all tags
-                $('main .content').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .payment').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
 
-                if ($('main .paymentpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
-                    $('main .paymentpage')
-                        .removeClass('in-active')
-                        .addClass('active');
-                }
-            })
-        });
+            if ($('main .paymentpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
+                $('main .paymentpage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
 </script>
 
 <!--for manager-->
 <script>
-        $(document).ready(function () {
-            $('.sidebar-menu ul li .manager').click(function () {
-                $('main .content').removeClass('active');       //Remove active class from all tags
-                $('main .content').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .manager').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
 
-                if ($('main .managerpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
-                    $('main .managerpage')
-                        .removeClass('in-active')
-                        .addClass('active');
-                }
-            })
-        });
+            if ($('main .managerpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
+                $('main .managerpage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.sidebar-menu ul li .feedback').click(function() {
+            $('main .content').removeClass('active'); //Remove active class from all tags
+            $('main .content').addClass('in-active'); // ADD CLASS TO ALL THE TAGS.
+
+            if ($('main .feedbackpage').hasClass('in-active')) { // CHECK IF THE TAG HAS 'in-active' CLASS.  
+                $('main .feedbackpage')
+                    .removeClass('in-active')
+                    .addClass('active');
+            }
+        })
+    });
 </script>
